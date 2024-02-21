@@ -77,6 +77,7 @@ export default function Home({posts}: Props) {
                         <p className="font-bold px-2 w-full"> {post.title} </p>
                         <p className='text-base text-gray text-xs py-1 px-2 '>by <span className="text-primaryColor">{post.author.name}</span> -
                             Published at   <span className="text-primaryColor" >{new Date(post.publishedAt).toDateString()}</span></p>
+                            
                    </div>
                      
                 </div>  
@@ -114,6 +115,7 @@ export default function Home({posts}: Props) {
 export const getServerSideProps =async ()=> {
   const query = `*[_type == "post"]{
     _id,
+    publishedAt,
     title,
     author ->{
       name,

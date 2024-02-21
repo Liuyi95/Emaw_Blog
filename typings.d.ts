@@ -16,5 +16,6 @@ export interface Post{
     slug:{
         current:string;
     };
-    body:[object];
+    body:[TypedObject];
+    // body:{children: {text: string}[]}[];
 }

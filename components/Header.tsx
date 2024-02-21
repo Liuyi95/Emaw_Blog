@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <div className="w-full h-20 font-titleFont sticky top-0 z-50 py-1  px-3 " style={{ backgroundColor: '#EC6865' }}>
       <div className="max-w-6xl h-full mx-auto flex justify-between items-center  py-1" >
-        <Link href="/">
+        <Link href="https://new.emaww.com/">
           <div>
             <Image width={138} height={90} src={emaww} alt="emaww-tw" />
           </div>

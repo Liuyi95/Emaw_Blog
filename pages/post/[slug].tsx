@@ -5,12 +5,16 @@ import { sanityClient ,urlFor} from '../../sanity';
 import { GetStaticProps  } from 'next';
 import {Post} from "../../typings"
 import { PortableText } from '@portabletext/react';
+import { RichText } from '../../components/RichText';
+
+
 
 interface Props{
     post: Post
 }
 
 const Post = ({post}: Props) => {
+    console.log(post)
     return (
     <div>
       <Header/>
@@ -32,12 +36,26 @@ const Post = ({post}: Props) => {
                 <p className='font-bodyFont text-base'> Blog post by <span>{post.author.name}</span> -
                 Published at   {new Date(post.publishedAt).toDateString()}</p>
             </div>
-            <div className='mt-10'>
-                {/* <PortableText
-                     dataset={process.env.NEXT_PUBLIC_SANITY_DATASET || 'production' }
-                     projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ||"5y506co7" }
-                value={post.body}
-                /> */}
+
+
+            <div className='prose'>
+            {/* {post?.map((post) => <div>{post.title}</div>)} */}
+            {/* {post && <div>{post.body[0].children[0].text}</div>} */}
+
+            {/* <PortableText
+                content={post.body[0].children[0]}
+
+                components={RichText}
+                // dataset={process.env.NEXT_PUBLIC_SANITY_DATASET || 'production' }
+                // projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ||"5y506co7" }
+        /> */}
+
+                <PortableText
+                    //  dataset={process.env.NEXT_PUBLIC_SANITY_DATASET || 'production' }
+                    //  projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ||"5y506co7" }
+                     value={post.body} 
+                     components={RichText}
+                />
             </div>
         </article>
       </div>
@@ -45,6 +63,7 @@ const Post = ({post}: Props) => {
     </div>
   )
 }
+
 
 export default Post;
 
@@ -81,7 +100,7 @@ export const getStaticProps: GetStaticProps = async({params})=>{
             description,
             mainImage,
             slug,
-            body
+            body,
     }`
 
     const post = await sanityClient.fetch(query,{
